@@ -1,0 +1,8 @@
+# Packages that the benchmark, the analysis and the paper build need (versions used for the reported results).
+# Python 3.8.20.  The paper additionally needs a TeX Live installation (latexmk, pdflatex, bibtex).
+numpy==1.24.4
+scipy==1.10.1
+pandas==2.0.3
+scikit-learn==1.3.2
+joblib==1.4.2
+matplotlib==3.7.5
