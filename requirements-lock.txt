@@ -1,5 +1,5 @@
-# Packages that the benchmark, the analysis and the paper build need (versions used for the reported results).
-# Python 3.8.20.  The paper additionally needs a TeX Live installation (latexmk, pdflatex, bibtex).
+# Python 3.8.20; package versions used for the recorded benchmark and analyses.
+# Historical LaTeX manuscript builds use TeX Live (latexmk, pdflatex, bibtex).
 numpy==1.24.4
 scipy==1.10.1
 pandas==2.0.3
