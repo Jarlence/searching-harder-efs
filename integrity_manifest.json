@@ -1,6 +1,6 @@
 {
   "format_version": 1,
-  "description": "Curated private research repository; no experimental records or code rewritten.",
+  "description": "Research repository containing frozen experimental records, source files, and analysis inputs.",
   "build_date": "2026-10-24",
   "source_container": {
     "filename": "ASOC_research_materials_final.zip",

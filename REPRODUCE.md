@@ -2,38 +2,37 @@
 
 ## 1. Verify and restore
 
-After downloading and extracting the repository, run these commands from its root:
+Download and extract the complete repository, then run from its root:
 
 ```sh
+python verify_repository.py
 python restore_materials.py --verify-only
 python restore_materials.py --output restored
 ```
 
-The verification utility uses Python 3.9+ and its standard library. It checks the supplied scientific archive parts against `integrity_manifest.json`, joins them, checks the reconstructed archives, and restores member paths. The restored collection folders preserve the retained bytes of the corresponding frozen scientific packages. The merged project applies R22, X11c, then X12m; collection-specific folders remain available for version inspection.
-
-The restoration step is a file integrity operation, not an independent rerun of the experiments. See the supplied provenance and exclusion inventories for the scope of this GitHub distribution.
+The restoration utility uses Python 3.9+ and the standard library. It checks archive parts, reconstructed archives, scientific members, and source files against `integrity_manifest.json`. Choose a new output directory. Saved collections are restored separately, and `restored/project` combines R22, X11c, and X12m in that order.
 
 ## 2. Prepare the scientific environment
 
-Use a separate environment with the package versions recorded in the restored `requirements-lock.txt` and the collection-specific environment/freeze records. The original numerical stack used Python 3.8.20, NumPy 1.24.4, SciPy 1.10.1, pandas 2.0.3, and scikit-learn 1.3.2. The X11c and X12m execution records also specify the CUDA/PyTorch environment used for the additional-benchmark jobs.
+Create a separate environment and working copy of `restored/project`. Use the versions in `requirements-lock.txt` and each collection's environment and freeze records. The original numerical stack used Python 3.8.20, NumPy 1.24.4, SciPy 1.10.1, pandas 2.0.3, and scikit-learn 1.3.2. X11c and X12m also record their CUDA/PyTorch environment.
 
-Do not install into or overwrite the original author's environment. Do not regenerate supplied protocol/code freezes. Reproducing a historical freeze requires its recorded source files and environment; the browsable source tree is a convenience view, not a replacement for all versioned freezes.
+Each collection's frozen source files and environment define its reproduction settings. The adjacent source directories provide browsing access; the restored collections retain the complete version-specific records. The Python 3.9+ restoration utility runs separately from the recorded Python 3.8 scientific environment.
 
-## 3. Inspect existing results first
+## 3. Inspect the saved results
 
-Within `restored/project`, the main result entry points are:
+Within `restored/project`, start with:
 
 | Study | Summary location |
 |---|---|
 | Strict inner-fold scaling, original benchmark | `results/r22_strict_scaling/REPORT.md` |
 | Additional eight-data-set validation | `results/new_data_confirmation_gpu/REPORT.md` and `primary.csv` |
-| Same-size follow-up | `results/new_data_samesize/REPORT.md` and the corresponding effect and comparison files |
+| Same-size follow-up | `results/new_data_samesize/REPORT.md` and its effect and comparison files |
 
-The saved JSON records contain the completed jobs. Checkpoints within a job do not increase the number of independent data sets or completed jobs. The scientific sample contains 48,510 completed jobs; interrupted execution records excluded from that sample are not additional observations.
+The collections contain 48,510 completed jobs. Within-job checkpoints are repeated observations; statistical inference uses datasets as its primary unit. Collection-specific records identify the analysis samples and their exclusions.
 
-## 4. Recompute summaries in a working copy
+## 4. Recompute summaries
 
-Make a separate working copy of `restored/project` before running analysis scripts, because the original scripts write to their `results/` destinations. The script paths and switches below are taken from the supplied implementation:
+Run analysis commands in the separate working copy because they write to `results/`:
 
 ```sh
 python analysis/strict_scaling_r22.py
@@ -41,12 +40,10 @@ python analysis/new_data_confirmation_gpu.py --analyse
 python analysis/new_data_samesize.py --analyse
 ```
 
-These original analysis entry points enforce their frozen source, data, and numerical-environment checks. The strict-scaling analysis requires the original source data to be acquired; the additional-data analyses also check the recorded CUDA environment. They are not hardware-independent reporting utilities. Use the saved CSV/JSON summaries for an offline inspection without that scientific environment. The Python 3.9+ restoration utility can run separately from the recorded Python 3.8 scientific environment.
+These entry points validate the recorded source, data, and numerical environments. The strict-scaling analysis requires the original source datasets; the additional-data analyses enforce their recorded CUDA environment. Saved CSV/JSON summaries support inspection without running those scripts.
 
-Original reporting-practice and control summaries are generated by the corresponding scripts in `analysis/`. Some original figure/manuscript-build commands require historical manuscript assets intentionally omitted from this code-and-results repository; they are not the current Word manuscript build process.
+The other scripts in `analysis/` generate reporting-practice and control summaries. Historical figure and manuscript builders require manuscript assets outside this code-and-results repository. The journal submission files are maintained separately.
 
-## 5. Rerun experiments only when explicitly needed
+## 5. Rerun experiments
 
-The full experimental dispatchers are retained under `experiments/` and `extras/`. Full reruns require the source data, pinned environment, and compute resources documented in the relevant collection. For the original data, use the supplied data-card and acquisition scripts. The additional-data collection includes the allowed UCI source copies and processed matrices, with attribution in `DATA_SOURCES.md`.
-
-Restoration and summary checking are sufficient for inspecting this release. Uploading this repository did not rerun experiments, alter results, or change the manuscript's scientific claims.
+`experiments/` and `extras/` contain the experiment dispatchers. Full reruns use the source data, frozen code, recorded environment, and compute resources for each collection. Retrieve original-benchmark data with the supplied data-card and acquisition scripts. The eight additional UCI source copies and processed matrices are included with attribution in [DATA_SOURCES.md](DATA_SOURCES.md).

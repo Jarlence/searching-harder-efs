@@ -1,12 +1,12 @@
 # Data sources and attribution
 
-The eight additional benchmark sources are third-party UCI Machine Learning Repository data sets. Their official pages were checked on **2026-10-24** and each identifies its data as licensed under **[Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)**. The repository account is not the creator of these data sets. Upstream creators are credited below, with the dataset DOI and source page as the authoritative attribution record.
+The eight additional benchmark sources are third-party UCI Machine Learning Repository data sets. Their official pages were checked on **2026-10-24** and each identifies its data as licensed under **[Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)**. Creators, dataset DOIs, and authoritative source records are listed below.
 
-The supplied processed matrices are derivatives prepared for this study. They are not new UCI releases. Preserve the source credit, DOI, license link, and the description of changes when redistributing them. These dataset licenses do not license the project software or other repository content; see [RIGHTS.md](RIGHTS.md).
+The processed matrices are study-specific derivatives. Redistribution retains the source credit, DOI, license link, and description of changes. [RIGHTS.md](RIGHTS.md) distinguishes dataset licensing from software licensing.
 
 ## Eight additional data sets
 
-Citation years below follow the UCI recommended dataset citations; they need not equal the page's donation date. Matrix dimensions are the study's frozen processed dimensions, not a claim about the complete upstream collection.
+Citation years follow UCI's recommended citations. Dimensions describe the frozen processed matrices used in this study.
 
 | Study ID | Official dataset and source | Upstream creator attribution | Dataset DOI | Processed matrix |
 |---|---|---|---|---|
@@ -19,7 +19,7 @@ Citation years below follow the UCI recommended dataset citations; they need not
 | `nc_qsar` | [QSAR biodegradation, UCI 254](https://archive.ics.uci.edu/dataset/254/qsar+biodegradation) | Kamel Mansouri, Tine Ringsted, Davide Ballabio, Roberto Todeschini, and Viviana Consonni (2013) | [10.24432/C5H60M](https://doi.org/10.24432/C5H60M) | 1,052 rows, 41 predictors |
 | `nc_spambase` | [Spambase, UCI 94](https://archive.ics.uci.edu/dataset/94/spambase) | Mark Hopkins, Erik Reeber, George Forman, and Jaap Suermondt (1999) | [10.24432/C53G6X](https://doi.org/10.24432/C53G6X) | 1,200 rows, 57 predictors |
 
-The abbreviated entries on the Climate source page are retained as an upstream metadata ambiguity. No identities have been inferred or invented. The linked record supplies the complete current recommended citation.
+The Climate source record abbreviates two creator entries as `D. D.`; the linked citation supplies the current source metadata.
 
 ## Copies and transformations included in the study
 
@@ -31,9 +31,9 @@ After running `restore_materials.py`, the X11c collection provides the following
 - `data/new_confirmation/processed/nc_*.npz` and `nc_*.json`: processed numerical arrays and their data cards.
 - `extras/confirmation_data.py`: deterministic parsing and cohort-construction implementation.
 
-The plan is a preserved historical protocol. Its initial proposed public-registration requirement is not evidence that external registration occurred before execution. The repository README describes the actual release status.
+The archived plan and registry record source selection, representations, and cohort construction. The repository README states the study's registration status.
 
-The processing preserves published numerical predictor representations, stores values as contiguous float64, and canonicalizes negative zero. It retains the first source row for each exactly equal predictor vector in source order, independently of the label. The archived registry records conflicting-label groups and retained source identities. This is feature-vector deduplication, not a claim that equal vectors necessarily represent the same physical measurement. Cohorts exceeding 1,200 feature-unique rows use the frozen stratified sampling rule and salt `X11c-fixed-cohort-20261014-v1`. Selected rows retain ascending source order. Binary labels are encoded using the recorded mapping. Learned vocabulary construction, imputation, and new supervised feature screening are not part of this adapter.
+The processing preserves published numerical predictor representations, stores values as contiguous float64, and canonicalizes negative zero. It retains the first source row for each exactly equal predictor vector in source order, independently of the label. The archived registry records conflicting-label groups and retained source identities. Deduplication uses numerical feature vectors as its criterion. Cohorts exceeding 1,200 feature-unique rows use the frozen stratified sampling rule and salt `X11c-fixed-cohort-20261014-v1`. Selected rows retain ascending source order. Binary labels are encoded using the recorded mapping. The adapter uses the published predictor representations directly, with no learned vocabulary construction, imputation, or new supervised feature screening.
 
 | Study ID | Published representation and study-specific changes |
 |---|---|
@@ -46,7 +46,7 @@ The processing preserves published numerical predictor representations, stores v
 | `nc_qsar` | Use the fixed descriptors in `biodeg.csv`; first-row retention reduces 1,055 rows to 1,052. |
 | `nc_spambase` | Use the official 57 numerical email predictors; first-row retention reduces 4,601 rows to 4,207 feature-unique rows, followed by the fixed 1,200-row cohort selection. |
 
-These transformations are documented as changes made for this study. The source authors are not represented as endorsing this study or its derived cohorts. The frozen plan and registry are authoritative for exact row selection and class encoding; this summary does not replace them.
+The frozen plan and registry record exact source rows, class encoding, and study-specific transformations.
 
 ## Integrity of the data copies
 
@@ -65,5 +65,5 @@ The following SHA-256 values come from the frozen X11c registry. The raw hash id
 
 ## Original benchmark sources
 
-R22 contains `data/data_cards.json` and acquisition/verification scripts, including `experiments/get_data.py` and `experiments/verify_data.py`. Its original third-party raw/processed datasets are not redistributed in this release. Retrieve them from the recorded upstream sources and observe those sources' applicable terms. This release check did not independently re-verify the licenses of all original thirteen sources; the eight-source CC BY 4.0 finding must not be extended to them.
+R22 provides `data/data_cards.json` and the acquisition/verification scripts `experiments/get_data.py` and `experiments/verify_data.py`. Retrieve the original raw and processed data separately from the recorded upstream sources under their dataset-specific terms. The CC BY 4.0 attribution above covers the eight additional UCI sources; licensing for the original benchmark follows its individual source records.
 
